@@ -2,7 +2,7 @@
 
 A simple sketch to test all fuctions of a RepRapDiscount Smart Controller or compatable.
 
-This also demonstrates how to use this LCD outside of a reprap/3d printer firmware
+This also demonstrates how to use this LCD outside of RepRap/3D printer firmware and serves as a starting point for projects that reuse older 3D printer hardware for new purposes.
 
 Designed for Arduino UNO
 
