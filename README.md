@@ -4,7 +4,7 @@ A simple sketch to test all fuctions of a RepRapDiscount Smart Controller or com
 
 This also demonstrates how to use this LCD outside of a reprap/3d printer firmware
 
-Designed for a ramps 1.4 board on a mega2560
+Designed for Arduino UNO
 
 It's all rather self explanatory
 
