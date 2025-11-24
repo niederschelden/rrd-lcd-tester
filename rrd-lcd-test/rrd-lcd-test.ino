@@ -6,27 +6,26 @@
 //Standard RRD smart controller LCD pins when on a RAMPS 1.4
 
 //lcd pins
-#define LCD_PINS_RS 16 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_ENABLE 17 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_D4 23 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_D5 25 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_D6 27 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_D7 29 //[RAMPS14-SMART-ADAPTER]
+#define LCD_PINS_RS 7 //[RAMPS14-SMART-ADAPTER]
+#define LCD_PINS_ENABLE 8 //[RAMPS14-SMART-ADAPTER]
+#define LCD_PINS_D4 9 //[RAMPS14-SMART-ADAPTER]
+#define LCD_PINS_D5 A0 //[RAMPS14-SMART-ADAPTER]
+#define LCD_PINS_D6 A1 //[RAMPS14-SMART-ADAPTER]
+#define LCD_PINS_D7 A2 //[RAMPS14-SMART-ADAPTER]
 
 //encoder pins
-#define BTN_EN1         31
-#define BTN_EN2         33
-#define BTN_ENC         35
+#define BTN_EN1         2
+#define BTN_EN2         3
+#define BTN_ENC         4
 
 //SDCARD Pins
-#define CS              16
-#define MOSI            17
-#define SCK             23
-#define SD_DETECT_PIN   49
-#define SDSS            53
+#define CS              10
+#define MOSI            11
+#define SCK             13
+#define SD_DETECT_PIN   A5
+#define SDSS            10
 
-#define BEEPER_PIN      37
-#define KILL_PIN        41
+#define BEEPER_PIN      A3
 
 #define screenX         20
 #define screenY         4
@@ -142,8 +141,6 @@ void setup() {
 
   pinMode(SD_DETECT_PIN, INPUT);        // Set SD_DETECT_PIN as an unput
   digitalWrite(SD_DETECT_PIN, HIGH);    // turn on pullup resistors
-  pinMode(KILL_PIN, INPUT);             // Set KILL_PIN as an unput
-  digitalWrite(KILL_PIN, HIGH);         // turn on pullup resistors
   pinMode(BTN_EN1, INPUT);              // Set BTN_EN1 as an unput, half of the encoder
   digitalWrite(BTN_EN1, HIGH);          // turn on pullup resistors
   pinMode(BTN_EN2, INPUT);              // Set BTN_EN2 as an unput, second half of the encoder
@@ -169,7 +166,7 @@ void setup() {
 //Main arduino loop
 void loop() {
   //If sd card is inserted display SD card info
-  if (!digitalRead(SD_DETECT_PIN)) {
+  if (!(digitalRead(SD_DETECT_PIN)) ) {
     status_line("SD Card Inserted");
     sdcardinit = card.init(SPI_HALF_SPEED, SDSS);
     if (!sdcardinit) sdcardinit = card.init(SPI_HALF_SPEED, SDSS);  //try it again.
@@ -205,27 +202,21 @@ void loop() {
     encoderPosLast = encoderPos;
 
     //check if both buttons and sound the ebuzzer
-    if ( !digitalRead(BTN_ENC) && !digitalRead(KILL_PIN) ) {
+    if ( !digitalRead(BTN_ENC) ) {
       status_line("Buzzer activated");
       digitalWrite(BEEPER_PIN, HIGH);
-      while (!digitalRead(BTN_ENC) && !digitalRead(KILL_PIN)); //wait for button release
+      while (!digitalRead(BTN_ENC)); //wait for button release
       digitalWrite(BEEPER_PIN, LOW);
       status_line("Buzzer deactivated");
     }
 
     //check encoder button
-    if ( !digitalRead(BTN_ENC) && digitalRead(KILL_PIN) ) {
+    if ( !digitalRead(BTN_ENC) ) {
       status_line("Enc: button pressed");
       //digitalWrite(BEEPER_PIN, HIGH);
-      while (!digitalRead(BTN_ENC) && digitalRead(KILL_PIN));
+      while (!digitalRead(BTN_ENC));
       //digitalWrite(BEEPER_PIN, LOW);
       status_line("Enc: button released");
-    }
-    //Check Kill Pin
-    if ( !digitalRead(KILL_PIN) && digitalRead(BTN_ENC) )  {
-      status_line("Kill button pressed");
-      while (!digitalRead(KILL_PIN) && digitalRead(BTN_ENC));
-      status_line("Kill button released");
     }
 
   }
