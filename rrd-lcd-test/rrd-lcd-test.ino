@@ -3,15 +3,14 @@
 
 //#define DEBUG  //turns on serial debugging
 
-//Standard RRD smart controller LCD pins when on a RAMPS 1.4
 
 //lcd pins
-#define LCD_PINS_RS 7 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_ENABLE 8 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_D4 9 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_D5 A0 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_D6 A1 //[RAMPS14-SMART-ADAPTER]
-#define LCD_PINS_D7 A2 //[RAMPS14-SMART-ADAPTER]
+#define LCD_PINS_RS 7 //[Arduino UNO]
+#define LCD_PINS_ENABLE 8 //[Arduino UNO]
+#define LCD_PINS_D4 9 //[Arduino UNO]
+#define LCD_PINS_D5 A0 //[Arduino UNO]
+#define LCD_PINS_D6 A1 //[Arduino UNO]
+#define LCD_PINS_D7 A2 //[Arduino UNO]
 
 //encoder pins
 #define BTN_EN1         2
@@ -29,6 +28,10 @@
 
 #define screenX         20
 #define screenY         4
+
+//FREE PINS
+//D5 + D6 Hardware PWM, share the same Timer (Timer 0)
+//A4: Analog 4 oder digital 18
 
 #include <LiquidCrystal.h>
 LiquidCrystal lcd(LCD_PINS_RS, LCD_PINS_ENABLE, LCD_PINS_D4, LCD_PINS_D5, LCD_PINS_D6, LCD_PINS_D7); //RS,Enable,D4,D5,D6,D7
