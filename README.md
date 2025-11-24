@@ -3,7 +3,7 @@
 A simple sketch to test all fuctions of a RepRapDiscount Smart Controller or compatable.
 
 **This project is based on the original work by [ellensp](https://github.com/ellensp/rrd-lcd-tester).  
-This fork changes die Pin Map to work for Arduino Uno**
+This fork changes the Pin Map to work for Arduino Uno**
 
 
 This also demonstrates how to use this LCD outside of RepRap/3D printer firmware and serves as a starting point for projects that reuse older 3D printer hardware for new purposes.
